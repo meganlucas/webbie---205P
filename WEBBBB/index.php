@@ -15,6 +15,10 @@ include("auth.php");
 <p>Welcome <?php echo $_SESSION['username']; ?>!</p>
 <p>This is secure area.</p>
 
+<form name="form" method="post" action="uploads.php" enctype="multipart/form-data" >
+<input type="submit" name="submit" value="Upload Image"/>
+</form>
+
 <p><a href="dashboard.php">Dashboard</a></p>
 <a href="logout.php">Logout</a>
 </div>
