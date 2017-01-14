@@ -29,8 +29,14 @@ a:hover{
      width: 500px;
      margin: 10% auto;
 }
+
 .form3{
   color:white;
+}
+
+.form6{
+     margin: 10% auto;
+     width: 600px;
 }
 
 .form4 {
@@ -79,6 +85,10 @@ a:hover{
 }
 
 .form5{
+  color:white;
+}
+
+.form7{
   color:white;
 }
 

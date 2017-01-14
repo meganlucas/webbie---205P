@@ -17,6 +17,13 @@ include("auth.php");
 <p><a href="view.php">View Snippets</a><p>
 <p><a href="profile.php">Edit Profile</a><p>
 <p><a href="logout.php">Logout</a></p>
+<p><a href="seticonurl.php">Set Profile Icon URL</a></p>
+<?php
+$username=  $_SESSION['username'];
+$sel_query="SELECT admin, username, id from users WHERE username='$username'";
+$result = mysqli_query($con,$sel_query);
+
+?>
 </div>
 </body>
 </html>

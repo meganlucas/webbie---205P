@@ -17,12 +17,20 @@ $username=  $_SESSION['username'];
 <div class="home">
 <div class="form">
 <p>Welcome <?php echo $_SESSION['username']; ?>!</p>
-<p>This is secure area.</p>
+<p>This is a secure area.</p>
 
 <p><a href="dashboard.php">Dashboard</a></p>
 <a href="logout.php">Logout</a></br></br>
-
-<br /><br />
+<?php $sel_query="SELECT username, id, profile_icon from users WHERE username='".$username."'";
+$result = mysqli_query($con,$sel_query);
+while($row = mysqli_fetch_assoc($result)) { ?>
+  <img height="120" width="120" src="<?php echo $row["profile_icon"];
+  ?>"></img>
+  <?php
+}?>
+<br /><p></p>
+<br />
+</br>
 <a href="viewimages.php">View All Images</a>
 <form action="uploadimage.php" method="post" enctype="multipart/form-data">
     Select image to upload:

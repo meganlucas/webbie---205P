@@ -18,12 +18,24 @@ if (isset($_REQUEST['username'])){
 	$email = mysqli_real_escape_string($con,$email);
 	$password = stripslashes($_REQUEST['password']);
 	$password = mysqli_real_escape_string($con,$password);
+	$error = "";
+	if (!$password) {
+			 $error .= "Please enter your password";
+	 } else {
+			 if (strlen($password) < 8) {
+					 $error .= "<br />Please enter a password";
+			 }
+
+			 if (!preg_match('`[A-Z]`', $password)) {
+					 $error .= "<br />Please include at least one capital letter in your password";
+			 }
+	 }
 	$trn_date = date("Y-m-d H:i:s");
         $query = "INSERT into `users` (username, password, email, trn_date)
 VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
         $result = mysqli_query($con,$query);
         if($result){
-            echo "<div class='form'>
+            echo "<div class='form7' align='center'>
 <h3>You are registered successfully.</h3>
 <br/>Click here to <a href='login.php'>Login</a></div>";
         }
