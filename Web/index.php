@@ -15,12 +15,13 @@ $username=  $_SESSION['username'];
 </head>
 <body>
 <div class="home">
-<div class="form10" align="center"></br></br>
+<div class="form10" align="center">
 <p align="center"><strong>Welcome <?php echo $_SESSION['username']; ?>!</strong></p>
 <p>This is a secure area.</p></br>
 
-<p><a href="dashboard.php">Dashboard</a></p>
-<a align=href="logout.php">Logout</a></br></br>This is your profile icon:</P></br>
+<p align="center"><a href="dashboard.php">Dashboard</a>
+| <a href="logout.php">Logout</a></p>
+</br></br><p>This is your profile icon:</p></br>
 <?php $sel_query="SELECT username, id, profile_icon from users WHERE username='".$username."'";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
@@ -31,7 +32,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <a href="viewimages.php">View All Of Your Images</a></br></br></br>
 <p><strong>Snippet Feed: See the latest snippest posts from each user.</strong></p></br>
 <div id="table" align="center">
-<table class="table2" width="35%" border="0" style="border-collapse:collapse;">
+<table class="table2" width="80%" border="0" style="border-collapse:collapse;">
 <thead>
 <tr>
 <th><strong>Username</strong></th>
