@@ -1,6 +1,17 @@
 <?php
 require('db.php');
+require('token.php');
 include("auth.php");
+
+if (isset($_POST['icon'], $_POST['token'])) {
+	$admin = $_POST['icon'];
+
+	if(!empty($icon)) {
+		if(Token::check($_POST['token'])) {
+    }
+	}
+	$token = new Token();
+}
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 
@@ -20,7 +31,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
     // may need to variables
     // $query = "UPDATE `hello`.`users` SET `email`='". mysqli_real_escape_string($conn, $_POST['email']) ."', `username`='". mysqli_real_escape_string($conn, $_POST['username']) . "', `password`='". md5($_POST['password']) . "' WHERE `email`='hello@gmail.com';";
     // $query = "UPDATE `register`.`Users` SET `email`='". $email."', `profile_icon`='". $icon."', `homepage`='". $home."', `password`='". $password . "' WHERE `username`='". $_SESSION['username']."';";
-    
+
      $query = "UPDATE `register`.`users` SET profile_icon=IF(LENGTH('$icon')=0, profile_icon, '$icon') WHERE `username`='". $_SESSION['username']."';";
 
     //echo $query;
@@ -51,4 +62,5 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 <form class="form4" method="post">
     <input type="text" name="icon" id="icon" placeholder="URL of profile icon"/>
     <input type="submit" name="submit" value="Change">
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 </form>

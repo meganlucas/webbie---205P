@@ -8,6 +8,19 @@
 <body>
 <?php
 require('db.php');
+require('token.php');
+
+if (isset($_POST['password'], $_POST['username'], $_POST['email'], $_POST['token'])) {
+	$password = $_POST['password'];
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+
+	if(!empty($password) && !empty($username) && !empty($email)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
 // If form submitted, insert values into the database.
 if (isset($_REQUEST['username'])){
         // removes backslashes
@@ -47,6 +60,7 @@ VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
 <input type="text" name="username" placeholder="Username" required />
 <input type="email" name="email" placeholder="Email" required />
 <input type="password" name="password" placeholder="Password" required />
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 <input type="submit" name="submit" value="Register" />
 </form>
 </div>

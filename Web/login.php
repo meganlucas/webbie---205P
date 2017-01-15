@@ -8,8 +8,21 @@
 <body>
 <?php
 require('db.php');
+require('token.php');
 session_start();
 // If form submitted, insert values into the database.
+if (isset($_POST['password'], $_POST['username'], $_POST['token'])) {
+	$password = $_POST['password'];
+	$username = $_POST['username'];
+
+	if(!empty($password) && !empty($username)) {
+		if(Token::check($_POST['token'])) {
+			echo 'Process Order';
+		}
+	}
+	$token = new Token();
+}
+
 if (isset($_POST['username'])){
         // removes backslashes
 	$username = stripslashes($_REQUEST['username']);
@@ -32,6 +45,7 @@ and password='".md5($password)."'";
 <br/>Click here to <a href='login.php'>Login</a></div>";
 	}
     }else{
+
 ?>
 <div class="form">
 <p class="title" align="center">Log In</p>
@@ -39,6 +53,7 @@ and password='".md5($password)."'";
 <input type="text" name="username" placeholder="Username" required />
 <input type="password" name="password" placeholder="Password" required />
 <input name="submit" type="submit" value="Login" />
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 </form>
 <p align="center">Not registered yet? <a href='registration.php'>Register Here</a></p>
 </div>

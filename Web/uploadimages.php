@@ -1,3 +1,17 @@
+<?php
+require('token.php');
+
+if (isset($_POST['fileToUpload'], $_POST['token'])) {
+	$password = $_POST['fileToUpload'];
+
+	if(!empty($fileToUpload)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -17,6 +31,7 @@
   </br></br>
     <input type="file" name="fileToUpload" id="fileToUpload"></br></br>
     <input type="submit" value="Upload Image" name="submit">
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 </form>
 <br /><br />
 </div>>

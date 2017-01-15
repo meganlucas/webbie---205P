@@ -1,5 +1,6 @@
 <?php
 require('db.php');
+require('token.php');
 include("auth.php");
 $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
@@ -13,6 +14,15 @@ if(isset($_POST['new']) && $_POST['new']==1){
     or die(mysql_error());
     $status = "New Record Inserted Successfully.
     </br></br><a href='view.php'>View Inserted Record</a>";
+}
+if (isset($_POST['name'], $_POST['token'])) {
+	$name = $_POST['name'];
+
+	if(!empty($name)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
 }
 ?>
 <!DOCTYPE html>
@@ -31,6 +41,7 @@ if(isset($_POST['new']) && $_POST['new']==1){
 <h1>Insert New Snippet</h1>
 <form name="form" method="post" action="">
 <input type="hidden" name="new" value="1" />
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 <p><input type="text" name="name" placeholder="Enter Snippet" required /></p>
 <p><input name="submit" type="submit" value="Submit" /></p>
 </form>

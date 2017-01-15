@@ -1,10 +1,20 @@
 <?php
 require('db.php');
+require('token.php');
 include("auth.php");
 $id=$_REQUEST['id'];
 $query = "SELECT * from new_record where id='".$id."'";
 $result = mysqli_query($con, $query) or die ( mysqli_error());
 $row = mysqli_fetch_assoc($result);
+if (isset($_POST['name'], $_POST['token'])) {
+	$username = $_POST['name'];
+
+	if(!empty($name)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,10 +36,9 @@ if(isset($_POST['new']) && $_POST['new']==1)
 $id=$_REQUEST['id'];
 $trn_date = date("Y-m-d H:i:s");
 $name =$_REQUEST['name'];
-$age =$_REQUEST['age'];
 $submittedby = $_SESSION["username"];
 $update="update new_record set trn_date='".$trn_date."',
-name='".$name."', age='".$age."',
+name='".$name."',
 submittedby='".$submittedby."' where id='".$id."'";
 mysqli_query($con, $update) or die(mysqli_error());
 $status = "Record Updated Successfully. </br></br>
@@ -41,10 +50,9 @@ echo '<p style="color:#FF0000;">'.$status.'</p>';
 <form name="form" method="post" action="">
 <input type="hidden" name="new" value="1" />
 <input name="id" type="hidden" value="<?php echo $row['id'];?>" />
-<p><input type="text" name="name" placeholder="Enter Name"
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
+<p><input type="text" name="name" placeholder="Enter Snippet"
 required value="<?php echo $row['name'];?>" /></p>
-<p><input type="text" name="age" placeholder="Enter Age"
-required value="<?php echo $row['age'];?>" /></p>
 <p><input name="submit" type="submit" value="Update" /></p>
 </form>
 <?php } ?>

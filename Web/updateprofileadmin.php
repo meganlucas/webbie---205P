@@ -1,6 +1,19 @@
 <?php
 require('db.php');
+require('token.php');
 include("auth.php");
+
+if (isset($_POST['icon'], $_POST['password'], $_POST['username'], $_POST['token'])) {
+	$password = $_POST['password'];
+	$username = $_POST['username'];
+  $icon = $_POST['icon'];
+
+	if(!empty($password) && !empty($username) && !empty($icon)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 
@@ -52,4 +65,5 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
     <input type="password" name="password" id="password" placeholder="new password"/>
     <input type="text" name="icon" id="icon" placeholder="URL of profile image"/>
     <input type="submit" name="submit" value="Change">
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 </form>
