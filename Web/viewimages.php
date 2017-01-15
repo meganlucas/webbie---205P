@@ -13,13 +13,15 @@ $username=  $_SESSION['username'];
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+</br>
+  <p align="center"><a href="index.php">Home</a>
+  |  <a href="dashboard.php">Dashboard</a>
+  | <a href="logout.php">Logout</a></p></br>
   <div class="home">
     <div class="form">
       <p>Welcome <?php echo $_SESSION['username']; ?>!</p>
       <p>You can see all of the images that you have uploaded on this page.</p>
-      <img src=""></img>
-      <p><a href="dashboard.php">Dashboard</a></p>
-      <a href="logout.php">Logout</a></br></br>
+      <img src=""></img></br>
       <?php
       $count=1;
       $sel_query="SELECT submittedby, file, id from images WHERE submittedby='".$username."'";

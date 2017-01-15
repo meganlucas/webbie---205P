@@ -11,12 +11,13 @@ $username=  $_SESSION['username'];
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="form">
+  <div class="view">
+  <div id="table3" align="center"></br></br>
 <p><a href="index.php">Home</a>
 | <a href="insert.php">Insert New Snippet</a>
-| <a href="logout.php">Logout</a></p>
-<h2>View Snippets</h2>
-<table class="table2" width="120%" border="0" style="border-collapse:collapse;">
+| <a href="logout.php">Logout</a></p></br>
+<p align="center" class="viewsnip"><strong>View All of Your Snippets:</strong></p>
+<table align="center" class="table2" width="25%" border="0" style="border-collapse:collapse;">
 <thead>
 <tr>
 <th><strong>Username</strong></th>
@@ -43,6 +44,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <?php $count++; } ?>
 </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>

@@ -1,3 +1,17 @@
+<?php
+require('token.php');
+
+if (isset($_POST['fileToUpload'], $_POST['token'])) {
+	$password = $_POST['fileToUpload'];
+
+	if(!empty($fileToUpload)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -7,18 +21,21 @@
 <br />
 </br>
 <body>
+	<p align="center"><a href="index.php">Home</a>
+	|  <a href="dashboard.php">Dashboard</a>
+	| <a href="logout.php">Logout</a></p></br>
   <div class="ting" align="center">
 <p>You can upload images here!</p>
-<a href="viewimages.php">View All Images</a>
-</br>
 </br>
 <form action="uploadimage.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-  </br></br>
+    <p>Select image to upload:</p>
+  </br>
     <input type="file" name="fileToUpload" id="fileToUpload"></br></br>
     <input type="submit" value="Upload Image" name="submit">
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 </form>
 <br /><br />
+<a href="viewimages.php">View All of Your Images</a>
 </div>>
 </body>
 </html>

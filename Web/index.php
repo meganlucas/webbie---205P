@@ -14,21 +14,24 @@ $username = sanitiseInput($_SESSION['username']);
 </head>
 <body>
 <div class="home">
-<div class="form">
-<p align="center">Welcome <?php echo sanitiseInput($_SESSION['username']); ?>!</p>
-<p>This is a secure area.</p>
+<div class="form10" align="center">
+<p align="center"><strong>Welcome <?php echo sanitiseInput($_SESSION['username']); ?>!</strong></p>
+<p>This is a secure area.</p></br>
 
-<p><a href="dashboard.php">Dashboard</a></p>
-<a href="logout.php">Logout</a></br></br></br>This is your profile icon:</P></br>
+<p align="center"><a href="dashboard.php">Dashboard</a>
+| <a href="logout.php">Logout</a></p>
+</br></br><p>This is your profile icon:</p></br>
 <?php $sel_query="SELECT username, id, profile_icon from users WHERE username='".sanitiseQuery($con, $username)."'";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
   <img align="center" height="120" width="120" src="<?php echo sanitiseInput($row["profile_icon"]);
   ?>"></img>
   <?php
-}?>
+}?></br></br>
+<a href="viewimages.php">View All Of Your Images</a></br></br></br>
+<p><strong>Snippet Feed: See the latest snippest posts from each user.</strong></p></br>
 <div id="table" align="center">
-<table class="table2" width="30%" border="0" style="border-collapse:collapse;">
+<table class="table2" width="80%" border="0" style="border-collapse:collapse;">
 <thead>
 <tr>
 <th><strong>Username</strong></th>
@@ -56,7 +59,6 @@ while($row = mysqli_fetch_assoc($result)) {
 <br /><p></p>
 <br />
 </br>
-<a href="viewimages.php">View All Images</a>
 <br /><br />
 
 </div>

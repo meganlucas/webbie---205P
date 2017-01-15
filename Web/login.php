@@ -1,18 +1,32 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
 require('db.php');
 require("security.php");
+require('token.php');
 session_start();
 // If form submitted, insert values into the database.
+if (isset($_POST['password'], $_POST['username'], $_POST['token'])) {
+	$password = $_POST['password'];
+	$username = $_POST['username'];
+
+	if(!empty($password) && !empty($username)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
+
 if (isset($_POST['username'])){
         // removes backslashes
 	$username = sanitiseInput($_REQUEST['username']);
 	$username = sanitiseQuery($con, $username);
-	$password = sanitiseQuery($con,password);
-	$password = md5(sanitiseInput($_REQUEST['password']));
+	$password = sanitiseInput($_REQUEST['password']);
+	$password = md5(sanitiseQuery($con, $password));
 
 	//Checking is user existing in the database or not
     $query = "SELECT * FROM users WHERE username='".$username."'
-and password='".$password."'");
+and password='".$password."'";
 	$result = mysqli_query($con,$query) or die(mysql_error());
 	$rows = mysqli_num_rows($result);
         if($rows==1){
@@ -23,8 +37,8 @@ and password='".$password."'");
 	echo "<div align='center' class='form3'>
 <h3>Username/password is incorrect.</h3>
 <br/>Click here to <a href='login.php'>Login</a></div>";
-	}
-    }else{
+		}
+    } else{
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,6 +54,7 @@ and password='".$password."'");
 <input type="text" name="username" placeholder="Username" required />
 <input type="password" name="password" placeholder="Password" required />
 <input name="submit" type="submit" value="Login" />
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 </form>
 <p align="center">Not registered yet? <a href='registration.php'>Register Here</a></p>
 </div>
@@ -63,7 +78,7 @@ while($row = mysqli_fetch_assoc($result)) {
 	?>
 <tr text-align="center"><td align="center"><?php echo $row["submittedby"]; ?></td>
 <td align="center"><?php echo $row["name"]; ?></td>
-<td align="center"><?php echo "<a href='user.php?user=$id'>View all of ". $id ."'s Snippets</a><br>"?></td>
+<td align="center"><?php echo "<a href='user.php?user=$id'>View all of ".$id."'s Snippets</a><br>"?></td>
 </tr>
 <?php $count++; } ?>
 </tbody>

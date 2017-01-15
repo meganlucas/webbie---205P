@@ -2,6 +2,7 @@
 require('db.php');
 require("security.php");
 require("auth.php");
+require('token.php');
 $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
     $trn_date = date("Y-m-d H:i:s");
@@ -17,6 +18,15 @@ if(isset($_POST['new']) && $_POST['new']==1){
     $status = "New Record Inserted Successfully.
     </br></br><a href='view.php'>View Inserted Record</a>";
 }
+if (isset($_POST['name'], $_POST['token'])) {
+	$name = $_POST['name'];
+
+	if(!empty($name)) {
+		if(Token::check($_POST['token'])) {
+		}
+	}
+	$token = new Token();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,14 +36,16 @@ if(isset($_POST['new']) && $_POST['new']==1){
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="form">
-<p><a href="dashboard.php">Dashboard</a>
+<div class="form" align="center">
+<p><a href="index.php">Home</a>
+|  <a href="dashboard.php">Dashboard</a>
 | <a href="view.php">View Snippets</a>
 | <a href="logout.php">Logout</a></p>
 <div>
 <h1>Insert New Snippet</h1>
 <form name="form" method="post" action="">
 <input type="hidden" name="new" value="1" />
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
 <p><input type="text" name="name" placeholder="Enter Snippet" required /></p>
 <p><input name="submit" type="submit" value="Submit" /></p>
 </form>

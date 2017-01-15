@@ -2,6 +2,17 @@
 require('db.php');
 require("auth.php");
 require("security.php");
+require('token.php');
+
+if (isset($_POST['admin'], $_POST['token'])) {
+	$admin = $_POST['admin'];
+
+	if(!empty($admin)) {
+		if(Token::check($_POST['token'])) {
+    }
+	}
+	$token = new Token();
+}
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
@@ -53,6 +64,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
           <select id="admin" name="admin">
           <option value="1">Admin</option>
           <option value="0">Not an Admin</option>
+          <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"/>
           </select>
         </br>
         </br>
