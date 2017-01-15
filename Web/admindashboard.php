@@ -1,10 +1,8 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
-
 require('db.php');
 $username=  $_SESSION['username'];
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +27,7 @@ $username=  $_SESSION['username'];
 $count=1;
 $sel_query="SELECT admin, username, id from users WHERE id";
 $result = mysqli_query($con,$sel_query);
-  if($row["admin"] = 1){?>
+?>
     <p align="center">Welcome to the admin dashboard <?php echo $_SESSION['username']; ?>!</p>
     <p>Because you're an admin, you can make other people admins or remove their admin status: </p><?php
     while($row = mysqli_fetch_assoc($result)) {?>
@@ -41,11 +39,6 @@ $result = mysqli_query($con,$sel_query);
 <?php $count++; } ?>
 </tbody>
 </table>
-<?php }
-else if($row["admin"] = 0){
-  echo "fuck you";
-}
-?>
 <p><a href="dashboard.php">Dashboard</a></p>
 <a href="logout.php">Logout</a></br></br>
 <br /><br />

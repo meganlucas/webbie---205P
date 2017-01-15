@@ -7,9 +7,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
     $query = "UPDATE `register`.`users` SET ";
 
     $icon = $_POST['icon'];
-    $password = md5($_POST['password']);
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($con,$username);
+    $password = $_POST['password'];
+    $username = $_POST['username'];
 
     if ($icon != "") {
         $query = $query."`profile_icon`='". $icon."',";

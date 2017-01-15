@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Login</title>
-<link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
 <?php
 require('db.php');
 session_start();
@@ -17,21 +9,28 @@ if (isset($_POST['username'])){
 	$password = $_REQUEST['password'];
 
 	//Checking is user existing in the database or not
-        $query = "SELECT * FROM `users` WHERE username='$username'
+        $query = "SELECT * FROM users WHERE username='$username'
 and password='".$password."'";
 	$result = mysqli_query($con,$query) or die(mysql_error());
 	$rows = mysqli_num_rows($result);
-        if($rows==1){
-	    $_SESSION['username'] = $username;
-            // Redirect user to index.php
-	    header("Location: index.php");
-         }else{
+    if($rows==1){
+		$_SESSION['username'] = $username;
+		header("Location: index.php");
+     }else{
 	echo "<div align='center' class='form3'>
 <h3>Username/password is incorrect.</h3>
 <br/>Click here to <a href='login.php'>Login</a></div>";
 	}
     }else{
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 <div class="form">
 <p class="title" align="center">Log In</p>
 <form align="center" action="" method="post" name="login">
@@ -68,7 +67,5 @@ while($row = mysqli_fetch_assoc($result)) {
 </table>
 </div>
 <?php } ?>
-
-
 </body>
 </html>

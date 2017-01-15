@@ -1,10 +1,8 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
-
 require('db.php');
 $username=  $_SESSION['username'];
-
 ?>
 <html>
 <head>

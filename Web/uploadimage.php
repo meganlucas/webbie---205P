@@ -23,14 +23,7 @@ $file_size = $_FILES['fileToUpload']['size'];
  $final_file=str_replace(' ','-',$new_file_name);
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
-    $check = $_FILES["fileToUpload"]["tmp_name"];
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
+    $uploadOk = 1;
 }
 // Check if file already exists
 if (file_exists($target_file)) {
