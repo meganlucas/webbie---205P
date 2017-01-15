@@ -1,10 +1,9 @@
 <?php
 //include auth.php file on all secure pages
-include("auth.php");
-
-require('db.php');
-$username=  $_SESSION['username'];
-
+	require("auth.php");
+	require("security.php");
+	require('db.php');
+	$username = sanitiseInput($_SESSION['username']);
 ?>
 <html>
 <head>
@@ -15,7 +14,7 @@ $username=  $_SESSION['username'];
 <body>
 <div class="home">
 <div class="form">
-<p>Welcome <?php echo $_SESSION['username']; ?>!</p>
+<p>Welcome <?php echo $username; ?>!</p>
 <p>Here you can change your account settings, like username, password, .</p>
 
 <p><a href="dashboard.php">Dashboard</a></p>

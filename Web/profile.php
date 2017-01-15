@@ -1,26 +1,27 @@
 <?php
 require('db.php');
-include("auth.php");
+require("auth.php");
+require("security.php");
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 
     $query = "UPDATE `register`.`users` SET ";
 
-    $icon = $_POST['icon'];
-    $password = md5($_POST['password']);
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($con,$username);
+    $icon = sanitiseInput($_POST['icon']);
+    $icon = sanitiseQuery($con, $icon);
+    $password = sanitiseQuery($con, $password);
+    $password = md5(sanitiseInput($_POST['password']));
+    $username = sanitiseInput($_POST['username']);
+    $username = sanitiseQuery($con, $username);
 
     if ($icon != "") {
-        $query = $query."`profile_icon`='". $icon."',";
+        $query = $query."`profile_icon`='".$icon."',";
     }
-
-
 
     // may need to variables
     // $query = "UPDATE `hello`.`users` SET `email`='". mysqli_real_escape_string($conn, $_POST['email']) ."', `username`='". mysqli_real_escape_string($conn, $_POST['username']) . "', `password`='". md5($_POST['password']) . "' WHERE `email`='hello@gmail.com';";
     // $query = "UPDATE `register`.`Users` SET `email`='". $email."', `profile_icon`='". $icon."', `homepage`='". $home."', `password`='". $password . "' WHERE `username`='". $_SESSION['username']."';";
-     $query = "UPDATE `register`.`users` SET username=IF(LENGTH('$username')=0, username, '$username'), profile_icon=IF(LENGTH('$icon')=0, profile_icon, '$icon'), password=IF(LENGTH('$password')=0, password, '$password') WHERE `username`='". $_SESSION['username']."';";
+     $query = "UPDATE `register`.`users` SET username=IF(LENGTH('$username')=0, username, '$username'), profile_icon=IF(LENGTH('$icon')=0, profile_icon, '$icon'), password=IF(LENGTH('$password')=0, password, '$password') WHERE `username`='". $username."';";
 
     //echo $query;
 

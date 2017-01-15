@@ -1,10 +1,9 @@
 <?php
 //include auth.php file on all secure pages
-include("auth.php");
-
-require('db.php');
-$username=  $_SESSION['username'];
-
+  include("auth.php");
+  require("security.php");
+  require('db.php');
+  $username =  sanitiseInput($_SESSION['username']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,18 +27,19 @@ $username=  $_SESSION['username'];
   <tbody>
 <?php
 $count=1;
-$sel_query="SELECT admin, username, id from users WHERE id";
+$sel_query="SELECT admin, username, id from users";
+$username = sanitiseInput($_SESSION['username']);
 $result = mysqli_query($con,$sel_query);
   if($row["admin"] = 1){?>
-  </br>  <p align="center">Welcome to the admin dashboard <?php echo $_SESSION['username']; ?>!</p>
+  </br>  <p align="center">Welcome to the admin dashboard <?php echo $username; ?>!</p>
     <p><a href="dashboard.php">Dashboard</a></p>
     <a href="logout.php">Logout</a></br></br>
     <p>Because you're an admin, you can make other people admins or remove their admin status: </p><?php
     while($row = mysqli_fetch_assoc($result)) {?>
-<tr><td align="center"><?php echo $row["username"]; ?></td>
-<td align="center"><?php echo $row["admin"]; ?></td>
+<tr><td align="center"><?php echo sanitiseInput($row["username"]); ?></td>
+<td align="center"><?php echo sanitiseInput($row["admin"]); ?></td>
 <td align="center"><a href="updateadmin.php?name=<?php echo $row["username"]; ?>">Make/Revoke Admin</a>
-<td align="center"><a href="updateprofileadmin.php?name=<?php echo $row["username"]; ?>">Edit <?php echo $row["username"]?>'s Profile</a>
+<td align="center"><a href="updateprofileadmin.php?name=<?php echo $row["username"]; ?>">Edit <?php echo sanitiseInput($row["username"])?>'s Profile</a>
 </td>
 </tr>
 <?php $count++; } ?>
@@ -47,7 +47,7 @@ $result = mysqli_query($con,$sel_query);
 </table>
 <?php }
 else if($row["admin"] = 0){
-  echo "<p>fuck you</p>";
+  echo "<p>get lost :p</p>";
 }
 ?>
 <br /><br />

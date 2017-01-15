@@ -31,8 +31,8 @@ $count=1;
 $sel_query="SELECT submittedby, name, id from new_record WHERE submittedby='".$username."'";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
-<tr><td align="center"><?php echo $row["submittedby"]; ?></td>
-<td align="center"><?php echo $row["name"]; ?></td>
+<tr><td align="center"><?php echo sanitiseInput($row["submittedby"]); ?></td>
+<td align="center"><?php echo sanitiseInput($row["name"]); ?></td>
 <td align="center">
 <a href="edit.php?id=<?php echo $row["id"]; ?>">Edit</a>
 </td>

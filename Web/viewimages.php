@@ -1,7 +1,7 @@
 <?php
 //include auth.php file on all secure pages
 include("auth.php");
-
+require("security.php");
 require('db.php');
 $username=  $_SESSION['username'];
 
@@ -20,13 +20,12 @@ $username=  $_SESSION['username'];
       <img src=""></img>
       <p><a href="dashboard.php">Dashboard</a></p>
       <a href="logout.php">Logout</a></br></br>
-
       <?php
       $count=1;
       $sel_query="SELECT submittedby, file, id from images WHERE submittedby='".$username."'";
       $result = mysqli_query($con,$sel_query);
       while($row = mysqli_fetch_assoc($result)) { ?>
-        <img height="120" width="120" src="<?php echo $row["file"];
+        <img height="120" width="120" src="<?php echo sanaitiseInput($row["file"]);
         ?>"></img>
         <?php $count++; } ?>
       </body>

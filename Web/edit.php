@@ -1,10 +1,13 @@
 <?php
-require('db.php');
-include("auth.php");
-$id=$_REQUEST['id'];
-$query = "SELECT * from new_record where id='".$id."'";
-$result = mysqli_query($con, $query) or die ( mysqli_error());
-$row = mysqli_fetch_assoc($result);
+	require('db.php');
+	require("security.php");
+	require("auth.php");
+
+	$id = sanitiseInput($_REQUEST['id']);
+	$id = sanitiseQuery($con, $id);
+	$query = "SELECT * from new_record where id='".$id."'";
+	$result = mysqli_query($con, $query) or die ( mysqli_error());
+	$row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,12 +26,15 @@ $row = mysqli_fetch_assoc($result);
 $status = "";
 if(isset($_POST['new']) && $_POST['new']==1)
 {
-$id=$_REQUEST['id'];
+$id=sanitiseInput($_REQUEST['id']);
+$id = sanitiseQuery($con, $id);
 $trn_date = date("Y-m-d H:i:s");
-$name =$_REQUEST['name'];
-$age =$_REQUEST['age'];
-$submittedby = $_SESSION["username"];
-$update="update new_record set trn_date='".$trn_date."',
+$name = sanitiseInput($_REQUEST['name']);
+$name = sanitiseQuery($con, $name);
+$age = sanitiseInput($_REQUEST['age']);
+$age = sanitiseQuery($con, $age);
+$submittedby = sanitiseInput($_SESSION["username"]);
+$update= "update new_record set trn_date='".$trn_date."',
 name='".$name."', age='".$age."',
 submittedby='".$submittedby."' where id='".$id."'";
 mysqli_query($con, $update) or die(mysqli_error());

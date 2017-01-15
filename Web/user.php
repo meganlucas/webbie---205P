@@ -1,6 +1,6 @@
 <?php
 require('db.php');
-
+require("security.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,12 +24,12 @@ require('db.php');
 <tbody>
 <?php
 $count=1;
-$user=$_GET["user"];
+$user=sanitiseInput($_GET["user"]);
 $sel_query="SELECT submittedby, name, id from new_record WHERE submittedby='$user'";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
-<tr><td align="center"><?php echo $row["submittedby"]; ?></td>
-<td align="center"><?php echo $row["name"]; ?></td>
+<tr><td align="center"><?php echo sanitiseInput($row["submittedby"]); ?></td>
+<td align="center"><?php echo sanitiseInput($row["name"]); ?></td>
 </tr>
 <?php $count++; } ?>
 </tbody>

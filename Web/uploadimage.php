@@ -1,11 +1,12 @@
 <?php
 require('db.php');
-include("auth.php");
+require("auth.php");
+require("security.php");
 $target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-$submittedby = $_SESSION["username"];
+$submittedby = sanitiseInput($_SESSION["username"]);
 $datetime = date("Y-m-d H:i:s");
 $directory = $target_file;
 $file_loc = $_FILES["fileToUpload"]["tmp_name"];

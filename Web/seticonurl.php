@@ -1,6 +1,7 @@
 <?php
 require('db.php');
-include("auth.php");
+require("auth.php");
+require("security.php");
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 

@@ -1,12 +1,15 @@
 <?php
 require('db.php');
-include("auth.php");
+require("security.php");
+require("auth.php");
 $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
     $trn_date = date("Y-m-d H:i:s");
-    $name =$_REQUEST['name'];
-    $submittedby = $_SESSION["username"];
-    $ins_query="insert into new_record
+    $name = sanitiseInput($_REQUEST['name']);
+    $name = sanitiseQuery($con, $name);
+    $submittedby = sanitiseInput($_SESSION["username"]);
+    $submittedby = sanitiseQuery($con, $submittedby);
+    $ins_query= "insert into new_record
     (`trn_date`,`name`,`submittedby`)values
     ('$trn_date','$name','$submittedby')";
     mysqli_query($con,$ins_query)

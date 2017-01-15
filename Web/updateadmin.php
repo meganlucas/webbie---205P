@@ -1,14 +1,15 @@
 <?php
 require('db.php');
-include("auth.php");
+require("auth.php");
+require("security.php");
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
   $query = "UPDATE `register`.`users` SET ";
 
-  $name = $_GET['name'];
-  $username =  $_SESSION['username'];
-  $admin = $_POST['admin'];
+  $name = sanitiseInput($_GET['name']);
+  $username =  sanitiseInput($_SESSION['username']);
+  $admin = sanitiseInput($_POST['admin']);
 
 
 
@@ -44,9 +45,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
     <p><a href="dashboard.php">Dashboard</a>
       | <a href="logout.php">Logout</a></p>
       <h1>Hi <?php
-      $username =  $_SESSION['username'];
+      $username =  sanitiseInput($_SESSION['username']);
       echo $username ?></h1>
-      <p>Here you can make <?php $name = $_GET['name']; echo $name?> an admin or remove <?php $name = $_GET['name']; echo $name?>'s admin status</p>
+      <p>Here you can make <?php $name = $_GET['name']; echo $name?> an admin or remove <?php $name = sanitiseInput($_GET['name']); echo $name?>'s admin status</p>
 
       <form name="form5" method="post" >
           <select id="admin" name="admin">

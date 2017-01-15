@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Login</title>
-<link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
 <?php
 require('db.php');
+require("security.php");
 session_start();
 // If form submitted, insert values into the database.
 if (isset($_POST['username'])){
         // removes backslashes
-	$username = stripslashes($_REQUEST['username']);
-        //escapes special characters in a string
-	$username = mysqli_real_escape_string($con,$username);
-	$password = stripslashes($_REQUEST['password']);
-	$password = mysqli_real_escape_string($con,$password);
+	$username = sanitiseInput($_REQUEST['username']);
+	$username = sanitiseQuery($con, $username);
+	$password = sanitiseQuery($con,password);
+	$password = md5(sanitiseInput($_REQUEST['password']));
+
 	//Checking is user existing in the database or not
-        $query = "SELECT * FROM `users` WHERE username='$username'
-and password='".md5($password)."'";
+    $query = "SELECT * FROM users WHERE username='".$username."'
+and password='".$password."'");
 	$result = mysqli_query($con,$query) or die(mysql_error());
 	$rows = mysqli_num_rows($result);
         if($rows==1){
@@ -33,6 +26,14 @@ and password='".md5($password)."'";
 	}
     }else{
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 <div class="form">
 <p class="title" align="center">Log In</p>
 <form align="center" action="" method="post" name="login">
@@ -58,7 +59,7 @@ $count=1;
 $sel_query="SELECT submittedby, id, name FROM new_record WHERE id IN (SELECT MAX(id) FROM new_record GROUP BY submittedby)";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) {
-	$id = $row["submittedby"];
+	$id = sanitiseInput($row["submittedby"]);
 	?>
 <tr text-align="center"><td align="center"><?php echo $row["submittedby"]; ?></td>
 <td align="center"><?php echo $row["name"]; ?></td>
@@ -69,7 +70,5 @@ while($row = mysqli_fetch_assoc($result)) {
 </table>
 </div>
 <?php } ?>
-
-
 </body>
 </html>

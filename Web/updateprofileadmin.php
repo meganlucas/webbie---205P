@@ -1,16 +1,16 @@
 <?php
 require('db.php');
-include("auth.php");
+require("auth.php");
+require("security.php");
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
 
     $query = "UPDATE `register`.`users` SET ";
 
-    $name = $_GET['name'];
-    $icon = $_POST['icon'];
-    $password = md5($_POST['password']);
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($con,$username);
+    $name = sanitiseInput($_GET['name']);
+    $icon = sanitiseInput($_POST['icon']);
+    $password = md5(sanitiseInput($_POST['password']);
+    $username = sanitiseInput($_POST['username']);
 
     if ($icon != "") {
         $query = $query."`profile_icon`='". $icon."',";

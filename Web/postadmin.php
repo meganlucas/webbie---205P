@@ -1,3 +1,4 @@
 <?php
-    echo $_POST['admin'];
+	require("security.php");
+    echo sanitiseString($_POST['admin']);
 ?>
