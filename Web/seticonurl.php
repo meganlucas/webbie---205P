@@ -20,6 +20,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Change') {
     // may need to variables
     // $query = "UPDATE `hello`.`users` SET `email`='". mysqli_real_escape_string($conn, $_POST['email']) ."', `username`='". mysqli_real_escape_string($conn, $_POST['username']) . "', `password`='". md5($_POST['password']) . "' WHERE `email`='hello@gmail.com';";
     // $query = "UPDATE `register`.`Users` SET `email`='". $email."', `profile_icon`='". $icon."', `homepage`='". $home."', `password`='". $password . "' WHERE `username`='". $_SESSION['username']."';";
+    
      $query = "UPDATE `register`.`users` SET profile_icon=IF(LENGTH('$icon')=0, profile_icon, '$icon') WHERE `username`='". $_SESSION['username']."';";
 
     //echo $query;

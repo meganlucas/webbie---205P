@@ -18,11 +18,12 @@ include("auth.php");
 <p><a href="profile.php">Edit Profile</a><p>
 <p><a href="logout.php">Logout</a></p>
 <p><a href="seticonurl.php">Set Profile Icon URL</a></p>
+<p><a href="uploadimages.php">Upload Images</a></p>
 <?php
 $username=  $_SESSION['username'];
 $sel_query="SELECT admin, username, id from users WHERE username='$username'";
 $result = mysqli_query($con,$sel_query);
-
+while($row = mysqli_fetch_assoc($result)) {}
 ?>
 </div>
 </body>
