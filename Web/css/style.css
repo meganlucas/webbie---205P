@@ -21,9 +21,14 @@ a:hover{
      text-decoration:underline;
 }
 
-.form{
+.form10{
      width: 500px;
      margin: 10% auto;
+}
+
+.viewsnip{
+  font-size: 4vh;
+  color: white;
 }
 
 .form2{
@@ -98,6 +103,11 @@ a:hover{
   color: white;
 }
 
+.view{
+  font-color: white;
+  color: white;
+}
+
 .home{
   border-radius: 3vh;
   width:80%;
@@ -108,6 +118,14 @@ a:hover{
 
 .table2{
   color: white;
+}
+
+.view{
+  color: white;
+}
+
+h2{
+  color:white;
 }
 
 h1{

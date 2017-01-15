@@ -10,8 +10,8 @@ include("auth.php");
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="form">
-<p>Welcome to Dashboard.</p>
+<div class="form" align="center">
+<p>Welcome to the Dashboard</p>
 <p><a href="index.php">Home</a><p>
 <p><a href="insert.php">Insert Snippet</a></p>
 <p><a href="view.php">View Snippets</a><p>
@@ -23,7 +23,12 @@ include("auth.php");
 $username=  $_SESSION['username'];
 $sel_query="SELECT admin, username, id from users WHERE username='$username'";
 $result = mysqli_query($con,$sel_query);
-while($row = mysqli_fetch_assoc($result)) {}
+while($row = mysqli_fetch_assoc($result)) {
+  print $row["admin"];
+  if($row["admin"] = 1){ ?>
+<p><a href="admindashboard.php"></a></p>
+<?php  }
+}
 ?>
 </div>
 </body>

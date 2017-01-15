@@ -33,8 +33,9 @@ if (isset($_POST['name'], $_POST['token'])) {
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<div class="form">
-<p><a href="dashboard.php">Dashboard</a>
+<div class="form" align="center">
+<p><a href="index.php">Home</a>
+|  <a href="dashboard.php">Dashboard</a>
 | <a href="view.php">View Snippets</a>
 | <a href="logout.php">Logout</a></p>
 <div>

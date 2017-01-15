@@ -28,14 +28,19 @@ $username=  $_SESSION['username'];
   <tbody>
 <?php
 $count=1;
-$sel_query="SELECT admin, username, id from users WHERE id";
+$sel_query="SELECT admin, username, id from users";
 $result = mysqli_query($con,$sel_query);
-  if($row["admin"] = 1){?>
+$sel_query2="SELECT admin, username, id from users WHERE username='$username'";
+$result2 = mysqli_query($con,$sel_query2);
+$row2 = mysqli_fetch_assoc($result2);
+print $row2["admin"];
+  if($row2["admin"] = 1){ ?>
   </br>  <p align="center">Welcome to the admin dashboard <?php echo $_SESSION['username']; ?>!</p>
     <p><a href="dashboard.php">Dashboard</a></p>
     <a href="logout.php">Logout</a></br></br>
     <p>Because you're an admin, you can make other people admins or remove their admin status: </p><?php
-    while($row = mysqli_fetch_assoc($result)) {?>
+    while($row = mysqli_fetch_assoc($result)) {
+      $admin_status=$row["admin"];?>
 <tr><td align="center"><?php echo $row["username"]; ?></td>
 <td align="center"><?php echo $row["admin"]; ?></td>
 <td align="center"><a href="updateadmin.php?name=<?php echo $row["username"]; ?>">Make/Revoke Admin</a>
@@ -46,8 +51,8 @@ $result = mysqli_query($con,$sel_query);
 </tbody>
 </table>
 <?php }
-else if($row["admin"] = 0){
-  echo "<p>fuck you</p>";
+else {
+  echo "<p>you are not an admin</p>";
 }
 ?>
 <br /><br />

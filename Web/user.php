@@ -6,13 +6,15 @@ require('db.php');
 <html>
 <head>
 <meta charset="utf-8">
-<title>View Records</title>
+<title>View Snippets</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <div class="user">
 <div class="form2">
-<p class="home2"><a href="index.php">Home</a></p>
+<p align="center"><a href="index.php">Home</a>
+|  <a href="dashboard.php">Dashboard</a>
+| <a href="logout.php">Logout</a></p>
 <h2 align="center">View Snippets</h2>
 <table class="table2" width="100%" border="0" style="border-collapse:collapse;">
 <thead>

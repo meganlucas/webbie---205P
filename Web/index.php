@@ -15,21 +15,23 @@ $username=  $_SESSION['username'];
 </head>
 <body>
 <div class="home">
-<div class="form">
-<p align="center">Welcome <?php echo $_SESSION['username']; ?>!</p>
-<p>This is a secure area.</p>
+<div class="form10" align="center"></br></br>
+<p align="center"><strong>Welcome <?php echo $_SESSION['username']; ?>!</strong></p>
+<p>This is a secure area.</p></br>
 
 <p><a href="dashboard.php">Dashboard</a></p>
-<a href="logout.php">Logout</a></br></br></br>This is your profile icon:</P></br>
+<a align=href="logout.php">Logout</a></br></br>This is your profile icon:</P></br>
 <?php $sel_query="SELECT username, id, profile_icon from users WHERE username='".$username."'";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
   <img align="center" height="120" width="120" src="<?php echo $row["profile_icon"];
   ?>"></img>
   <?php
-}?>
+}?></br></br>
+<a href="viewimages.php">View All Of Your Images</a></br></br></br>
+<p><strong>Snippet Feed: See the latest snippest posts from each user.</strong></p></br>
 <div id="table" align="center">
-<table class="table2" width="30%" border="0" style="border-collapse:collapse;">
+<table class="table2" width="35%" border="0" style="border-collapse:collapse;">
 <thead>
 <tr>
 <th><strong>Username</strong></th>
@@ -57,7 +59,6 @@ while($row = mysqli_fetch_assoc($result)) {
 <br /><p></p>
 <br />
 </br>
-<a href="viewimages.php">View All Images</a>
 <br /><br />
 
 </div>
